@@ -3,6 +3,10 @@
 # auteur:<atfield2501@gmail.com>
 # Script d'interrogation de la base de donnée wikipédia à travers son api
 
+# Evolution: 
+#   * Reussir à encoder correctement la sortie standard #!*$
+#   * Prendre plusieurs parametre pour composer un phrase telle que: Lotus Blancs
+
 import urllib2
 import json
 import requests
@@ -12,6 +16,8 @@ import codecs
 	
 wikipedia = "http://fr.wikipedia.org/w/api.php?action=opensearch&search="
 
+ii=len(sys.argv)
+print ii
 
 try:
     print(sys.argv[1])
@@ -19,9 +25,15 @@ try:
     add= str(sys.argv[1])
     soft = wikipedia+add
 
-    response = urllib2.urlopen(soft)                  
+
+    response = urllib2.urlopen(soft)
+                   
     obj1 = json.loads(response.read())    
+
     armadda = obj1[ 2 ] 
+
+
+
     ss = json.dumps(armadda)
 
 
@@ -35,6 +47,7 @@ try:
     ss = ss.replace('\u00bb' , ">>")
     ss = ss.replace('\u00f9' , "ù")
     ss = ss.replace('\u00e2' , "à")
+    ss = ss.replace('\u00c9' , "ê")
     print ss
 
 
