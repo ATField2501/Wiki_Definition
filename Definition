@@ -1,0 +1,48 @@
+#!/usr/bin/env python2
+# -*- coding: utf8 
+# auteur:<atfield2501@gmail.com>
+# Script d'interrogation de la base de donnée wikipédia à travers son api
+
+import urllib2
+import json
+import requests
+import sys
+import codecs
+
+	
+wikipedia = "http://fr.wikipedia.org/w/api.php?action=opensearch&search="
+
+
+try:
+    print(sys.argv[1])
+
+    add= str(sys.argv[1])
+    soft = wikipedia+add
+
+
+    response = urllib2.urlopen(soft)
+                   
+    obj1 = json.loads(response.read())    
+
+    armadda = obj1[ 2 ] 
+
+
+
+    ss = json.dumps(armadda)
+
+
+    ss = ss.replace('\u00e9' , 'é')
+    ss = ss.replace('\u00e7' , 'ç')
+    ss = ss.replace('\u00e8' , 'è')
+    ss = ss.replace('\u00e0' , 'à')
+    ss = ss.replace('\u0153' , 'œ')
+    ss = ss.replace('\u2019' , "'")
+    ss = ss.replace('\u00ab' , "<<")
+    ss = ss.replace('\u00bb' , ">>")
+    ss = ss.replace('\u00f9' , "ù")
+    ss = ss.replace('\u00e2' , "à")
+    print ss
+
+
+except IndexError:
+   print "* Erreur. Vous devez spécifier une cible"
