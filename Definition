@@ -24,18 +24,10 @@ try:
 
     add= str(sys.argv[1])
     soft = wikipedia+add
-
-
-    response = urllib2.urlopen(soft)
-                   
+    response = urllib2.urlopen(soft)                   
     obj1 = json.loads(response.read())    
-
     armadda = obj1[ 2 ] 
-
-
-
     ss = json.dumps(armadda)
-
 
     ss = ss.replace('\u00e9' , 'é')
     ss = ss.replace('\u00e7' , 'ç')
